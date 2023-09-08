@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!--  视图前缀  -->
+    <context-param>
+        <param-name>view-prefix</param-name>
+        <param-value>/WEB-INF/pages/</param-value>
+    </context-param>
+    <!--  视图后缀  -->
+    <context-param>
+        <param-name>view-suffix</param-name>
+        <param-value>.html</param-value>
+    </context-param>
+    <!--  配置ioc加载配置文件  -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>applicationContext.xml</param-value>
+    </context-param>
+    <!-- 配置baseDAO注入   -->
+    <context-param>
+        <param-name>baseDAOType</param-name>
+        <param-value>com.canvs.ssm.basedao.BaseDAO</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pojoPath</param-name>
+        <param-value>com.canvs.book.pojo</param-value>
+    </context-param>
+
+    <!-- 是否开启session验证   -->
+    <context-param>
+        <param-name>isSessionAccess</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <!--  配置访问白名单;由于&会报错，用#代替  -->
+    <context-param>
+        <param-name>whiteList</param-name>
+        <param-value>
+            /page?operate=page#page=user/login,
+            /page?operate=page#page=user/regist,
+            /user,
+            /book
+        </param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>default</servlet-name>
+        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>listings</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/*</url-pattern> <!-- 指定静态资源的URL路径 -->
+    </servlet-mapping>
+</web-app>
